@@ -38,22 +38,12 @@ class UserResource extends Resource
                             ->email()
                             ->required()
                             ->maxLength(255),
-                        // Forms\Components\DateTimePicker::make('email_verified_at'),
                         Forms\Components\TextInput::make('password')
                             ->password()
                             ->required()
                             ->maxLength(255)
                             ->revealable()
                             ->hiddenOn(['view', 'edit']),
-                        // Forms\Components\TextInput::make('custom_fields'),
-                        // Forms\Components\TextInput::make('avatar_url')
-                        //     ->maxLength(255),
-
-                        // Forms\Components\Select::make('roles')
-                        //     ->label(__('filament-spatie-roles-permissions::filament-spatie.field.roles'))
-                        //     // ->options(Role::all()->pluck('name', 'id'))
-                        //     ->multiple()
-                        //     ->relationship('roles', 'name')
                         Forms\Components\Select::make('roles')
                             ->multiple()
                             ->label(__('filament-spatie-roles-permissions::filament-spatie.field.roles'))
@@ -63,20 +53,6 @@ class UserResource extends Resource
                             )
                             ->getOptionLabelFromRecordUsing(fn (Model $record) => "{$record->name} ({$record->guard_name})")
                             ->searchable(['name', 'guard_name']) // searchable on both name and guard_name        
-
-                            // ->relationship(
-                            //     name: 'roles',
-                            //     titleAttribute: 'name',
-                            //     modifyQueryUsing: function(Builder $query, Get $get) {
-                            //         if (!empty($get('guard_name'))) {
-                            //             $query->where('guard_name', $get('guard_name'));
-                            //         }
-                            //         if(Filament::hasTenancy()) {
-                            //             return $query->where(config('permission.column_names.team_foreign_key'), Filament::getTenant()->id);
-                            //         }
-                            //         return $query;
-                            //     }
-                            // )
                             ->columnSpanFull()
                             ->preload(config('filament-spatie-roles-permissions.preload_roles', true)),
 
@@ -95,9 +71,6 @@ class UserResource extends Resource
                     ->searchable(),
                 Tables\Columns\TextColumn::make('roles.name')
                     ->label(__('filament-spatie-roles-permissions::filament-spatie.field.role')),
-                // Tables\Columns\TextColumn::make('email_verified_at')
-                //     ->dateTime()
-                //     ->sortable(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->label(__('filament::resources/user.field.created_at'))
                     ->dateTime()
@@ -106,8 +79,6 @@ class UserResource extends Resource
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
-                // Tables\Columns\TextColumn::make('avatar_url')
-                //     ->searchable(),
                 Tables\Columns\TextColumn::make('deleted_at')
                     ->dateTime()
                     ->sortable()
