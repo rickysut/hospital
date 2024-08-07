@@ -11,7 +11,7 @@ return [
         ],
 
         'confirm' => [
-            'label' => 'Konfirmasi',
+            'label' => 'Yakin',
         ],
 
         'submit' => [

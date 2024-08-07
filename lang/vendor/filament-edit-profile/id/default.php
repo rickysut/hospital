@@ -1,10 +1,10 @@
 <?php
 
 return [
-    'title' => 'Ubah Profile',
+    'title' => 'Ubah Profil',
     'profile_information' => 'Informasi Profile',
     'profile_information_description' => 'Ubah profile anda .',
-    'name' => 'Nama Lengkap',
+    'name' => 'ID Pengguna',
     'email' => 'Email',
     'avatar' => 'Photo',
     'password' => 'Password',
@@ -44,4 +44,5 @@ return [
     'browser_sessions_last_active' => 'Aktifitas terakhir',
     'browser_sessions_log_out' => 'Log Out dari sesi browser lainnya',
     'browser_sessions_confirm_pass' => 'Masukkan kata sandi untuk mengonfirmasi bahwa Anda ingin keluar dari sesi peramban lain di semua perangkat.',
+    'navigation_group' => 'Pengaturan',
 ];

@@ -44,4 +44,5 @@ return [
     'browser_sessions_last_active' => 'Last active',
     'browser_sessions_log_out' => 'Log Out Other Browser Sessions',
     'browser_sessions_confirm_pass' => 'Please enter your password to confirm you would like to log out of your other browser sessions across all of your devices.',
+    'navigation_group' => 'Settings',
 ];
