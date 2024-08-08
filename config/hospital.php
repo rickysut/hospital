@@ -1,5 +1,5 @@
 <?php
 
 return [
-    'top_navigation' => true,
+    'top_navigation' => false,
 ];

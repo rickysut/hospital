@@ -4,6 +4,7 @@ namespace App\Providers\Filament;
 
 use Althinect\FilamentSpatieRolesPermissions\FilamentSpatieRolesPermissionsPlugin;
 use App\Filament\Auth\LoginEx as AuthLoginEx;
+use DutchCodingCompany\FilamentDeveloperLogins\FilamentDeveloperLoginsPlugin;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
@@ -35,10 +36,15 @@ class AdminPanelProvider extends PanelProvider
             ->id('admin')
             ->path('')
             ->login(AuthLoginEx::class)
+            ->brandLogo(asset('logo.png'))
+            ->brandLogoHeight('2.5rem')
+            ->favicon(asset('favicon-16x16.png'))
             ->colors([
                 'primary' => Color::Cyan,
             ])
             ->topNavigation($isTop)
+            // ->collapsibleNavigationGroups(true)
+            ->sidebarCollapsibleOnDesktop(true)
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\\Filament\\Resources')
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\\Filament\\Pages')
             ->pages([
@@ -59,7 +65,17 @@ class AdminPanelProvider extends PanelProvider
                 ->setIcon('heroicon-o-user')
                 ->setSort(10)
                 ->shouldShowBrowserSessionsForm()
-                ->shouldShowAvatarForm()    
+                ->shouldShowAvatarForm() ,
+                FilamentDeveloperLoginsPlugin::make()
+                ->enabled()
+                ->column('name')
+                ->switchable(false)
+                ->users([
+                    'Admin' => 'administrator',
+                    'Kasir' => 'kasir01',
+                    'Perawat' => 'perawat01',
+                    'Super User' => 'super'
+                ])   
             ])  
             ->userMenuItems([
                 'profile' => MenuItem::make()
