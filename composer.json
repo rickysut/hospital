@@ -9,6 +9,7 @@
         "althinect/filament-spatie-roles-permissions": "^2.2",
         "bezhansalleh/filament-language-switch": "^3.1",
         "dutchcodingcompany/filament-developer-logins": "^1.2",
+        "eightynine/filament-excel-import": "^3.1",
         "filament/filament": "^3.2",
         "joaopaulolndev/filament-edit-profile": "^1.0",
         "laravel/framework": "^11.9",

@@ -2,17 +2,17 @@
 
 return [
 
-    'label' => 'Impor :label',
+    'label' => 'Unggah :label',
 
     'modal' => [
 
-        'heading' => 'Impor :label',
+        'heading' => 'Unggah :label',
 
         'form' => [
 
             'file' => [
-                'label' => 'Berkas',
-                'placeholder' => 'Unggah berkas CSV',
+                'label' => 'File',
+                'placeholder' => 'Unggah file CSV',
             ],
 
             'columns' => [
@@ -29,7 +29,7 @@ return [
             ],
 
             'import' => [
-                'label' => 'Impor',
+                'label' => 'Unggah',
             ],
 
         ],
@@ -40,12 +40,12 @@ return [
 
         'completed' => [
 
-            'title' => 'Impor selesai',
+            'title' => 'Unggah selesai',
 
             'actions' => [
 
                 'download_failed_rows_csv' => [
-                    'label' => 'Unduh informasi baris yang gagal diimpor',
+                    'label' => 'Unduh informasi baris yang gagal diunggah',
                 ],
 
             ],
@@ -54,12 +54,12 @@ return [
 
         'max_rows' => [
             'title' => 'Ukuran berkas CSV terlalu besar',
-            'body' => 'Anda tidak dapat mengimpor lebih dari :count baris sekaligus.',
+            'body' => 'Anda tidak dapat mengunggah lebih dari :count baris sekaligus.',
         ],
 
         'started' => [
-            'title' => 'Impor dimulai',
-            'body' => 'Mulai mengimpor :count baris dan proses akan berjalan di belakang layar.',
+            'title' => 'Unggah dimulai',
+            'body' => 'Mulai mengunggah :count baris dan proses akan berjalan di belakang layar.',
         ],
 
     ],
