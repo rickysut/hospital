@@ -25,12 +25,12 @@ class RegionImporter extends Importer
 
     public function resolveRecord(): ?Region
     {
-        // return Region::firstOrNew([
-        //     // Update existing records, matching them by `$this->data['column_name']`
-        //     'email' => $this->data['email'],
-        // ]);
+        return Region::firstOrNew(
+            // Update existing records, matching them by `$this->data['column_name']`
+            ['kode' => $this->data['kode']]
+        );
 
-        return new Region();
+        // return new Region();
     }
 
     public static function getCompletedNotificationBody(Import $import): string

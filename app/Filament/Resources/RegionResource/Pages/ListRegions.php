@@ -15,22 +15,23 @@ class ListRegions extends ListRecords
 
     protected function getHeaderActions(): array
     {
+        set_time_limit(1300);
         return [
-            \EightyNine\ExcelImport\ExcelImportAction::make(__('filament::resources/region.import.label'))
-            // ->slideOver()
-            ->color("primary")
-            ->validateUsing([
-                'kode' => 'required',
-                'nama' => 'required',
-            ])
-            // ->processCollectionUsing(function (string $modelClass, Collection $collection) {
-            //     // Do some stuff with the collection
-            //     return $collection;
-            // })
-            ->use(RegionImport::class)
-            ,
-            // Actions\ImportAction::make(__('filament::resources/region.import.label'))
-            //     ->importer(RegionImporter::class)->chunkSize(250)->csvDelimiter(';'),
+            // \EightyNine\ExcelImport\ExcelImportAction::make(__('filament::resources/region.import.label'))
+            // // ->slideOver()
+            // ->color("primary")
+            // ->validateUsing([
+            //     'kode' => 'required',
+            //     'nama' => 'required',
+            // ])
+            // // ->processCollectionUsing(function (string $modelClass, Collection $collection) {
+            // //     // Do some stuff with the collection
+            // //     return $collection;
+            // // })
+            // ->use(RegionImport::class)
+            // ,
+            Actions\ImportAction::make(__('filament::resources/region.import.label'))
+                ->importer(RegionImporter::class)->chunkSize(2500)->csvDelimiter(';'),   
             Actions\CreateAction::make(),
         ];
     }
