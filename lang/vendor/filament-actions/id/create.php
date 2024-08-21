@@ -4,11 +4,11 @@ return [
 
     'single' => [
 
-        'label' => 'Buat',
+        'label' => 'Tambah',
 
         'modal' => [
 
-            'heading' => 'Buat :label',
+            'heading' => 'Tambah :label',
 
             'actions' => [
 
@@ -17,7 +17,7 @@ return [
                 ],
 
                 'create_another' => [
-                    'label' => 'Simpan & buat lainnya',
+                    'label' => 'Simpan & tambah lagi',
                 ],
 
             ],

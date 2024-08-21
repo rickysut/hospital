@@ -2,9 +2,9 @@
 
 return [
 
-    'title' => 'Buat :label',
+    'title' => 'Tambah :label',
 
-    'breadcrumb' => 'Buat',
+    'breadcrumb' => 'Tambah',
 
     'form' => [
 
@@ -19,7 +19,7 @@ return [
             ],
 
             'create_another' => [
-                'label' => 'Simpan & buat lainnya',
+                'label' => 'Simpan & tambah lagi',
             ],
 
         ],

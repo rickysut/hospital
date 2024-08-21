@@ -25,17 +25,20 @@ class PasienResource extends Resource
 {
     protected static ?string $model = Pasien::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-user-plus';
 
-    protected static ?string $pluralModelLabel = 'Pasien';
+    // protected static ?string $pluralModelLabel = 'Pasien';
 
-    protected static ?string $modelLabel = 'Pasien Biasa';
+    // protected static ?string $modelLabel = 'Pasien Biasa';
 
-    protected static ?string $navigationLabel = 'Pasien Biasa';
+    // protected static ?string $navigationLabel = 'Pasien Biasa';
     
-    // protected static ?string $navigationParentItem = 'Pasien';    
+    // // protected static ?string $navigationParentItem = 'Pasien';    
     
-    protected static ?string $navigationGroup = 'Pendaftaran';       
+    // protected static ?string $navigationGroup = 'Pendaftaran';   
+    
+    // protected static ?string $breadcrumb = 'Pendaftaran'; 
+
 
 
 
@@ -47,4 +50,28 @@ class PasienResource extends Resource
             // 'edit' => Pages\EditPasien::route('/{record}/edit'),
         ];
     }
-}
+
+    public static function getHeading(): string  
+    {
+        return __('filament::resources/pasien-umum.heading');
+    }
+
+    public static function getModelLabel(): string 
+    {   
+        return __('filament::resources/pasien-umum.label');
+    }
+
+    public static function getPluralModelLabel(): string 
+    {   
+        return __('filament::resources/pasien-umum.plural_label');
+    }
+
+    public static function getNavigationGroup():?string
+    {
+        return __('filament::resources/pasien-umum.nav_groups');
+    }
+
+    public static function getBreadcrumb(): string
+    {
+        return __('filament::resources/pasien-umum.nav_groups');
+    }}

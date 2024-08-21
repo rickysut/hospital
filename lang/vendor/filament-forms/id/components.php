@@ -358,7 +358,7 @@ return [
 
                 'modal' => [
 
-                    'heading' => 'Buat',
+                    'heading' => 'Tambah',
 
                     'actions' => [
 
@@ -367,7 +367,7 @@ return [
                         ],
 
                         'create_another' => [
-                            'label' => 'Simpan & buat lainnya',
+                            'label' => 'Simpan & tambah lagi',
                         ],
 
                     ],
