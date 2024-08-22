@@ -18,7 +18,7 @@ class Pasien extends Model
 {
     use HasFactory;
 
-    protected $table = 'Pasien';
+    protected $table = 'pasien';
 
     protected $fillable = [
             'type', //0: biasa ; 1: tidak dikenal; 2 bayi
@@ -66,9 +66,7 @@ class Pasien extends Model
             'no_telp_penanggung',
             'nama_pengantar',
             'no_telp_pengantar',
-            //identitas pengantar pasien
-            'nama_pengantar',
-            'hp_penanggung',
+            
             //bayi
             'nama_bayi',
             'nama_ibu_bayi',

@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\PasienResource\Pages;
 
+use App\Filament\Clusters\Registration;
 use App\Filament\Resources\PasienResource;
 use App\Models\Region;
 use Filament\Forms\Components\Actions;
@@ -271,5 +272,12 @@ class PasienBiasa extends CreateRecord
     public function getTitle(): string
     {
         return  __('filament::resources/pasien-umum.heading');
+    }
+
+    protected function mutateFormDataBeforeCreate(array $data): array
+    {
+        $data['type'] = 0;
+
+        return $data;
     }
 }

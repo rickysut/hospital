@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources;
 
+use App\Filament\Clusters\Registration;
 use App\Filament\Resources\PasienResource\Pages;
 use App\Filament\Resources\PasienResource\RelationManagers;
 use App\Models\Pasien;
@@ -27,27 +28,11 @@ class PasienResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-user-plus';
 
-    // protected static ?string $pluralModelLabel = 'Pasien';
-
-    // protected static ?string $modelLabel = 'Pasien Biasa';
-
-    // protected static ?string $navigationLabel = 'Pasien Biasa';
     
-    // // protected static ?string $navigationParentItem = 'Pasien';    
-    
-    // protected static ?string $navigationGroup = 'Pendaftaran';   
-    
-    // protected static ?string $breadcrumb = 'Pendaftaran'; 
-
-
-
-
     public static function getPages(): array
     {
         return [
             'index' => Pages\PasienBiasa::route('/'),
-            // 'create' => Pages\PasienBiasa::route('/create'),
-            // 'edit' => Pages\EditPasien::route('/{record}/edit'),
         ];
     }
 

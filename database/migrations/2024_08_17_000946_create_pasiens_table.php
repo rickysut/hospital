@@ -21,7 +21,7 @@ return new class extends Migration
     {
         Schema::create('pasien', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->enum('type', JenisPasien::values()); //0: biasa ; 1: tidak dikenal; 2 bayi
+            $table->integer('type'); //0: biasa ; 1: tidak dikenal; 2 bayi
             $table->string('nama')->nullable(); // nama lengkap
             $table->string('no_rm')->unique(); // no rekam medis
             $table->string('nik',16)->nullable(); // nik 16 numeric

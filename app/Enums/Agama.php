@@ -7,12 +7,12 @@ use Kongulov\Traits\InteractWithEnum;
 enum Agama: int {
     use InteractWithEnum;
 
-    case ISLAM = 0; 
-    case KRISTEN = 1; 
-    case KATOLIK = 2; 
-    case HINDU = 3; 
-    case BUDHA = 4; 
-    case KONGHUCU = 5; 
-    case PENGAYAT = 6; 
-    case LAINLAIN = 7;
+    case ISLAM = 1; 
+    case KRISTEN = 2; 
+    case KATOLIK = 3; 
+    case HINDU = 4; 
+    case BUDHA = 5; 
+    case KONGHUCU = 6; 
+    case PENGAYAT = 7; 
+    case LAINLAIN = 8;
 }
