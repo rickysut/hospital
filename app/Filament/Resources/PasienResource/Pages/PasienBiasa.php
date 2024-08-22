@@ -3,6 +3,7 @@
 namespace App\Filament\Resources\PasienResource\Pages;
 
 use App\Filament\Resources\PasienResource;
+use App\Models\Region;
 use Filament\Forms\Components\Actions;
 use Filament\Forms\Components\Actions\Action;
 use Filament\Forms\Components\DatePicker;
@@ -10,6 +11,7 @@ use Filament\Forms\Components\Fieldset;
 use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Select;
+use Filament\Forms\Components\Tabs;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Wizard;
@@ -32,145 +34,117 @@ class PasienBiasa extends CreateRecord
 
     public function form(Form $form): Form
     {
+
         return parent::form($form)
             ->schema([
                 Wizard::make([
                     Wizard\Step::make(__('filament::resources/pasien-umum.wizard.head_1'))
                         ->schema([
-                            
-                                TextInput::make('nama')
-                                    ->hiddenLabel()
-                                    ->placeholder(__('filament::resources/pasien-umum.field.nama'))
-                                    ->required(),
-                                TextInput::make('no_rm')
-                                    ->hiddenLabel()
-                                    ->placeholder(__('filament::resources/pasien-umum.field.no_rm'))
-                                    ->required(),
-                                TextInput::make('nik')
-                                    ->hiddenLabel()
-                                    ->maxLength(16)
-                                    ->placeholder('NIK'), 
-                                TextInput::make('id_wna')
-                                    ->hiddenLabel()
-                                    ->placeholder(__('filament::resources/pasien-umum.field.id_wna')),
-                                TextInput::make('ibu_kandung')
-                                    ->hiddenLabel()
-                                    ->placeholder(__('filament::resources/pasien-umum.field.ibu_kandung')),
-                                Select::make('gender')
-                                    ->hiddenLabel()
-                                    ->placeholder(__('filament::resources/pasien-umum.field.gender'))
-                                    ->required()
-                                    ->options([
-                                        0 => __('filament::resources/pasien-umum.gender.0'),
-                                        1 => __('filament::resources/pasien-umum.gender.1'),
-                                        2 => __('filament::resources/pasien-umum.gender.2'),
-                                        3 => __('filament::resources/pasien-umum.gender.3'),
-                                        4 => __('filament::resources/pasien-umum.gender.4'),
-                                    ]),
-                                
-                            
-                                
-                            // Fieldset::make('Tempat & tgl lahir')
-                            //     ->schema([
-                                    
-                                    TextInput::make('tempat_lahir')
-                                        ->hiddenLabel()
-                                        ->datalist([
-                                            'ACEH',
-                                            'SUMATERA UTARA',
-                                            'SUMATERA BARAT',
-                                            'RIAU',
-                                            'JAMBI',
-                                            'SUMATERA SELATAN',
-                                            'BENGKULU',
-                                            'LAMPUNG',
-                                            'KEP. BANGKA BELITUNG',
-                                            'KEP. RIAU',
-                                            'DKI JAKARTA',
-                                            'JAWA BARAT',
-                                            'JAWA TENGAH',
-                                            'DI YOGYAKARTA',
-                                            'JAWA TIMUR',
-                                            'BANTEN',
-                                            'BALI',
-                                            'NUSA TENGGARA BARAT',
-                                            'NUSA TENGGARA TIMUR',
-                                            'KALIMANTAN BARAT',
-                                            'KALIMANTAN TENGAH',
-                                            'KALIMANTAN SELATAN',
-                                            'KALIMANTAN TIMUR',
-                                            'KALIMANTAN UTARA',
-                                            'SULAWESI UTARA',
-                                            'SULAWESI TENGAH',
-                                            'SULAWESI SELATAN',
-                                            'SULAWESI TENGGARA',
-                                            'GORONTALO',
-                                            'MALUKU',
-                                            'MALUKU UTARA',
-                                            'PAPUA BARAT',
-                                            'PAPUA'
-                                            ])
-                                        ->placeholder(__('filament::resources/pasien-umum.field.tempat_lahir')), 
-                                    DatePicker::make('tanggal_lahir')
-                                        ->hiddenLabel()
-                                        ->placeholder(__('filament::resources/pasien-umum.field.tanggal_lahir')), 
-                                // ])->columns(2),  
-                                
+
+                            TextInput::make('nama')
+                                ->hiddenLabel()
+                                ->placeholder(__('filament::resources/pasien-umum.field.nama'))
+                                ->required(),
+                            TextInput::make('no_rm')
+                                ->hiddenLabel()
+                                ->placeholder(__('filament::resources/pasien-umum.field.no_rm'))
+                                ->required(),
+                            TextInput::make('nik')
+                                ->hiddenLabel()
+                                ->mask('9999999999999999')
+                                ->length(16)
+                                ->placeholder('NIK'),
+                            TextInput::make('id_wna')
+                                ->hiddenLabel()
+                                ->placeholder(__('filament::resources/pasien-umum.field.id_wna')),
+                            TextInput::make('ibu_kandung')
+                                ->hiddenLabel()
+                                ->placeholder(__('filament::resources/pasien-umum.field.ibu_kandung')),
+                            Select::make('gender')
+                                ->hiddenLabel()
+                                ->placeholder(__('filament::resources/pasien-umum.field.gender'))
+                                ->required()
+                                ->options([
+                                    0 => __('filament::resources/pasien-umum.gender.0'),
+                                    1 => __('filament::resources/pasien-umum.gender.1'),
+                                    2 => __('filament::resources/pasien-umum.gender.2'),
+                                    3 => __('filament::resources/pasien-umum.gender.3'),
+                                    4 => __('filament::resources/pasien-umum.gender.4'),
+                                ]),
+
+                            TextInput::make('tempat_lahir')
+                                ->hiddenLabel()
+                                ->placeholder(__('filament::resources/pasien-umum.field.tempat_lahir')),
+                            DatePicker::make('tanggal_lahir')
+                                ->hiddenLabel()
+                                ->placeholder(__('filament::resources/pasien-umum.field.tanggal_lahir')),
+
                             Fieldset::make('Lain-lain')
-                                ->schema([        
-                                Select::make('agama')
-                                    ->hiddenLabel()     
-                                    ->placeholder(__('filament::resources/pasien-umum.field.agama'))
-                                    ->required()
-                                    ->options([
-                                        1 => __('filament::resources/pasien-umum.religion.1'),
-                                        2 => __('filament::resources/pasien-umum.religion.2'),
-                                        3 => __('filament::resources/pasien-umum.religion.3'),
-                                        4 => __('filament::resources/pasien-umum.religion.4'),
-                                        5 => __('filament::resources/pasien-umum.religion.5'),
-                                        6 => __('filament::resources/pasien-umum.religion.6'),
-                                        7 => __('filament::resources/pasien-umum.religion.7'),
-                                        8 => __('filament::resources/pasien-umum.religion.8'), 
-                                    ]),
-                                TextInput::make('suku')
-                                    ->hiddenLabel()
-                                    ->placeholder(__('filament::resources/pasien-umum.field.suku')),
-                                TextInput::make('bahasa')
-                                    ->hiddenLabel()
-                                    ->placeholder(__('filament::resources/pasien-umum.field.bahasa'))
-                            ])->columns(3)
+                                ->schema([
+                                    Select::make('agama')
+                                        ->hiddenLabel()
+                                        ->placeholder(__('filament::resources/pasien-umum.field.agama'))
+                                        ->required()
+                                        ->options([
+                                            1 => __('filament::resources/pasien-umum.religion.1'),
+                                            2 => __('filament::resources/pasien-umum.religion.2'),
+                                            3 => __('filament::resources/pasien-umum.religion.3'),
+                                            4 => __('filament::resources/pasien-umum.religion.4'),
+                                            5 => __('filament::resources/pasien-umum.religion.5'),
+                                            6 => __('filament::resources/pasien-umum.religion.6'),
+                                            7 => __('filament::resources/pasien-umum.religion.7'),
+                                            8 => __('filament::resources/pasien-umum.religion.8'),
+                                        ]),
+                                    TextInput::make('suku')
+                                        ->hiddenLabel()
+                                        ->placeholder(__('filament::resources/pasien-umum.field.suku')),
+                                    TextInput::make('bahasa')
+                                        ->hiddenLabel()
+                                        ->placeholder(__('filament::resources/pasien-umum.field.bahasa'))
+                                ])->columns(3)
                         ])->columns(2),
                     Wizard\Step::make(__('filament::resources/pasien-umum.wizard.head_2'))
                         ->schema([
-                            
+
                             TextInput::make('alamat')
                                 ->hiddenLabel()
                                 ->placeholder(__('filament::resources/pasien-umum.field.alamat')),
                             TextInput::make('rt')
                                 ->hiddenLabel()
+                                ->mask('999')
                                 ->placeholder('RT'),
                             TextInput::make('rw')
                                 ->hiddenLabel()
+                                ->mask('999')
                                 ->placeholder('RW'),
-                            TextInput::make('kelurahan')
+                            Select::make('kelurahan')
                                 ->hiddenLabel()
-                                ->placeholder(__('filament::resources/pasien-umum.field.kelurahan')),
-                            TextInput::make('kecamatan')
+                                ->placeholder(__('filament::resources/pasien-umum.field.kelurahan'))
+                                ->searchable(['nama'])
+                                ->getSearchResultsUsing(fn(string $search): array => Region::where('nama', 'like', "%{$search}%")->whereRaw('LENGTH(kode) = 13')->limit(10)->pluck('nama', 'kode')->toArray()),
+                            Select::make('kecamatan')
                                 ->hiddenLabel()
-                                ->placeholder(__('filament::resources/pasien-umum.field.kecamatan')),
-                            TextInput::make('kota')
+                                ->placeholder(__('filament::resources/pasien-umum.field.kecamatan'))
+                                ->searchable(['nama'])
+                                ->getSearchResultsUsing(fn(string $search): array => Region::where('nama', 'like', "%{$search}%")->whereRaw('LENGTH(kode) = 8')->limit(10)->pluck('nama', 'kode')->toArray()),
+                            Select::make('kota')
                                 ->hiddenLabel()
-                                ->placeholder(__('filament::resources/pasien-umum.field.kota')),
+                                ->placeholder(__('filament::resources/pasien-umum.field.kota'))
+                                ->searchable(['nama'])
+                                ->getSearchResultsUsing(fn(string $search): array => Region::where('nama', 'like', "%{$search}%")->whereRaw('LENGTH(kode) = 5')->limit(10)->pluck('nama', 'kode')->toArray()),
                             TextInput::make('kode_pos')
-                                ->hiddenLabel() 
+                                ->hiddenLabel()
+                                ->mask('99999')
                                 ->placeholder(__('filament::resources/pasien-umum.field.kode_pos')),
-                            TextInput::make('provinsi')
-                                ->hiddenLabel() 
-                                ->placeholder(__('filament::resources/pasien-umum.field.provinsi')),
+                            Select::make('provinsi')
+                                ->hiddenLabel()
+                                ->placeholder(__('filament::resources/pasien-umum.field.provinsi'))
+                                ->searchable(['nama'])
+                                ->getSearchResultsUsing(fn(string $search): array => Region::where('nama', 'like', "%{$search}%")->whereRaw('LENGTH(kode) = 2')->limit(10)->pluck('nama', 'kode')->toArray()),
                             TextInput::make('negara')
-                                ->hiddenLabel() 
+                                ->hiddenLabel()
                                 ->placeholder(__('filament::resources/pasien-umum.field.negara')),
-                            
+
                         ])->columns(2),
                     Wizard\Step::make(__('filament::resources/pasien-umum.wizard.head_3'))
                         ->schema([
@@ -180,54 +154,65 @@ class PasienBiasa extends CreateRecord
                                 ->placeholder(__('filament::resources/pasien-umum.field.alamat_domisili')),
                             TextInput::make('dom_rt')
                                 ->hiddenLabel()
+                                ->mask('999')
                                 ->placeholder(__('filament::resources/pasien-umum.field.dom_rt')),
                             TextInput::make('dom_rw')
                                 ->hiddenLabel()
-                                ->placeholder('RW sesuai domisili'), 
-                            TextInput::make('dom_kelurahan')
+                                ->mask('999')
+                                ->placeholder('RW sesuai domisili'),
+                            Select::make('dom_kelurahan')
                                 ->hiddenLabel()
-                                ->placeholder(__('filament::resources/pasien-umum.field.dom_kelurahan')), 
-                            TextInput::make('dom_kecamatan')
+                                ->placeholder(__('filament::resources/pasien-umum.field.dom_kelurahan'))
+                                ->searchable(['nama'])
+                                ->getSearchResultsUsing(fn(string $search): array => Region::where('nama', 'like', "%{$search}%")->whereRaw('LENGTH(kode) = 13')->limit(10)->pluck('nama', 'kode')->toArray()),
+                            Select::make('dom_kecamatan')
                                 ->hiddenLabel()
-                                ->placeholder(__('filament::resources/pasien-umum.field.dom_kecamatan')), 
-                            TextInput::make('dom_kota')
+                                ->placeholder(__('filament::resources/pasien-umum.field.dom_kecamatan'))
+                                ->searchable(['nama'])
+                                ->getSearchResultsUsing(fn(string $search): array => Region::where('nama', 'like', "%{$search}%")->whereRaw('LENGTH(kode) = 8')->limit(10)->pluck('nama', 'kode')->toArray()),
+                            Select::make('dom_kota')
                                 ->hiddenLabel()
-                                ->placeholder(__('filament::resources/pasien-umum.field.dom_kota')), 
+                                ->placeholder(__('filament::resources/pasien-umum.field.dom_kota'))
+                                ->searchable(['nama'])
+                                ->getSearchResultsUsing(fn(string $search): array => Region::where('nama', 'like', "%{$search}%")->whereRaw('LENGTH(kode) = 5')->limit(10)->pluck('nama', 'kode')->toArray()),
                             TextInput::make('dom_kode_pos')
                                 ->hiddenLabel()
-                                ->placeholder(__('filament::resources/pasien-umum.field.dom_kode_pos')), 
-                            TextInput::make('dom_provinsi')
+                                ->mask('99999')
+                                ->placeholder(__('filament::resources/pasien-umum.field.dom_kode_pos')),
+                            Select::make('dom_provinsi')
                                 ->hiddenLabel()
-                                ->placeholder(__('filament::resources/pasien-umum.field.dom_provinsi')), 
+                                ->placeholder(__('filament::resources/pasien-umum.field.dom_provinsi'))
+                                ->searchable(['nama'])
+                                ->getSearchResultsUsing(fn(string $search): array => Region::where('nama', 'like', "%{$search}%")->whereRaw('LENGTH(kode) = 2')->limit(10)->pluck('nama', 'kode')->toArray()),
                             TextInput::make('dom_negara')
                                 ->hiddenLabel()
-                                ->placeholder(__('filament::resources/pasien-umum.field.dom_negara')), 
+                                ->placeholder(__('filament::resources/pasien-umum.field.dom_negara')),
                             Actions::make([
-                                    Action::make(__('filament::resources/pasien-umum.wizard.button_copy'))
-                                        ->action(function (Get $get, Set $set) {
-                                            $set('alamat_domisili', str($get('alamat')));
-                                            $set('dom_rt', str($get('rt')));
-                                            $set('dom_rw', str($get('rw')));
-                                            $set('dom_kelurahan', str($get('kelurahan')));
-                                            $set('dom_kecamatan', str($get('kecamatan')));
-                                            $set('dom_kota', str($get('kota')));
-                                            $set('dom_kode_pos', str($get('kode_pos')));
-                                            $set('dom_provinsi', str($get('provinsi')));
-                                            $set('dom_negara', str($get('negara')));
-                                        })
-                                ]),
-                            
+                                Action::make(__('filament::resources/pasien-umum.wizard.button_copy'))
+                                    ->action(function (Get $get, Set $set) {
+                                        $set('alamat_domisili', str($get('alamat')));
+                                        $set('dom_rt', str($get('rt')));
+                                        $set('dom_rw', str($get('rw')));
+                                        $set('dom_kelurahan', str($get('kelurahan')));
+                                        $set('dom_kecamatan', str($get('kecamatan')));
+                                        $set('dom_kota', str($get('kota')));
+                                        $set('dom_kode_pos', str($get('kode_pos')));
+                                        $set('dom_provinsi', str($get('provinsi')));
+                                        $set('dom_negara', str($get('negara')));
+                                    })
+                            ]),
+
 
                         ])->columns(2),
                     Wizard\Step::make(__('filament::resources/pasien-umum.wizard.head_4'))
                         ->schema([
                             TextInput::make('no_telp')
                                 ->hiddenLabel()
-                                ->tel()
+                                ->mask('999999999999999')
                                 ->placeholder(__('filament::resources/pasien-umum.field.no_telp')),
                             TextInput::make('no_hp')
                                 ->hiddenLabel()
-                                ->tel()
+                                ->mask('999999999999999')
                                 ->placeholder(__('filament::resources/pasien-umum.field.no_hp')),
                             Select::make('pendidikan')
                                 ->hiddenLabel()
@@ -241,7 +226,7 @@ class PasienBiasa extends CreateRecord
                                     5 => __('filament::resources/pasien-umum.pendidikan.5'),
                                     6 => __('filament::resources/pasien-umum.pendidikan.6'),
                                     7 => __('filament::resources/pasien-umum.pendidikan.7'),
-                                    8 => __('filament::resources/pasien-umum.pendidikan.8'), 
+                                    8 => __('filament::resources/pasien-umum.pendidikan.8'),
                                 ]),
                             Select::make('pekerjaan')
                                 ->hiddenLabel()
@@ -266,7 +251,7 @@ class PasienBiasa extends CreateRecord
 
                         ])->columns(2),
                 ])->skippable()
-                ->submitAction(new HtmlString(Blade::render(<<<BLADE
+                    ->submitAction(new HtmlString(Blade::render(<<<BLADE
                     <x-filament::button
                         type="submit"
                         size="sm"

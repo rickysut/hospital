@@ -12,6 +12,7 @@ use App\Enums\Pendidikan;
 use App\Enums\Umur;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Pasien extends Model
 {
@@ -85,5 +86,10 @@ class Pasien extends Model
         'hubungan_penanggung' => Hubungan::class,
         'perkiraan_umur' => Umur::class,
     ];
+
+    public function provinsi(): BelongsTo
+    {
+        return $this->belongsTo(Regions::class, 'provinsi', 'kode');
+    }
 
 }
