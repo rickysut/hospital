@@ -29,8 +29,8 @@ return new class extends Migration
             $table->string('ibu_kandung')->nullable();  //  nama ibu kandung
             $table->string('tempat_lahir')->nullable(); // tempat lahir
             $table->date('tanggal_lahir')->nullable(); // tanggal_lahir 
-            $table->enum('gender', Gender::values())->nullable();
-            $table->enum('agama', Agama::values())->nullable();  
+            $table->integer('gender')->nullable();
+            $table->integer('agama')->nullable();  
             $table->string('suku')->nullable();  // suku
             $table->string('bahasa')->nullable(); // bahasa yg dikuasai
             $table->string('alamat')->nullable(); // alamat lengkap
@@ -53,16 +53,16 @@ return new class extends Migration
             $table->string('dom_negara')->nullable();
             $table->string('no_telp')->nullable(); // no telp rumah / tmpt tinggal
             $table->string('no_hp')->nullable(); // no hp
-            $table->enum('pendidikan', Pendidikan::values())->nullable(); 
-            $table->enum('pekerjaan',Pekerjaan::values())->nullable();
-            $table->enum('status_pernikahan', Marital::values())->nullable(); 
+            $table->integer('pendidikan')->nullable(); 
+            $table->integer('pekerjaan')->nullable();
+            $table->integer('status_pernikahan')->nullable(); 
             //bagian pasien tidak dikenal
-            $table->enum('perkiraan_umur',Umur::values())->nullable();
+            $table->integer('perkiraan_umur')->nullable();
             $table->text('lokasi_ditemukan')->nullable(); 
             $table->date('tgl_ditemukan')->nullable();
             //identitas penanggung
             $table->string('nama_penanggung')->nullable();
-            $table->enum('hubungan_penanggung', Hubungan::values())->nullable();
+            $table->integer('hubungan_penanggung')->nullable();
             $table->string('no_telp_penanggung',25)->nullable();
             //identitas pengantar pasien
             $table->string('nama_pengantar')->nullable();

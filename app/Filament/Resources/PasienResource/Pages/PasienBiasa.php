@@ -85,7 +85,6 @@ class PasienBiasa extends CreateRecord
                                     Select::make('agama')
                                         ->hiddenLabel()
                                         ->placeholder(__('filament::resources/pasien-umum.field.agama'))
-                                        ->required()
                                         ->options([
                                             1 => __('filament::resources/pasien-umum.religion.1'),
                                             2 => __('filament::resources/pasien-umum.religion.2'),
@@ -122,26 +121,41 @@ class PasienBiasa extends CreateRecord
                                 ->hiddenLabel()
                                 ->placeholder(__('filament::resources/pasien-umum.field.kelurahan'))
                                 ->searchable(['nama'])
-                                ->getSearchResultsUsing(fn(string $search): array => Region::where('nama', 'like', "%{$search}%")->whereRaw('LENGTH(kode) = 13')->limit(10)->pluck('nama', 'kode')->toArray()),
+                                ->selectablePlaceholder(false)
+                                ->getSearchResultsUsing(fn(string $search): array => Region::where('nama', 'like', "%{$search}%")->whereRaw('LENGTH(kode) = 13')->limit(10)->pluck('nama', 'kode')->toArray())
+                                ->getOptionLabelUsing(fn ($value): ?string => Region::where('kode', $value)->value('nama'))
+                                ->afterStateUpdated(function (Get $get, Set $set)  { 
+                                    $set('kecamatan', substr($get('kelurahan'),0,8));
+                                    $set('kota', substr($get('kelurahan'),0,5));
+                                    $set('provinsi', substr($get('kelurahan'),0,2));
+                                })
+                                ->live(),
                             Select::make('kecamatan')
                                 ->hiddenLabel()
                                 ->placeholder(__('filament::resources/pasien-umum.field.kecamatan'))
                                 ->searchable(['nama'])
-                                ->getSearchResultsUsing(fn(string $search): array => Region::where('nama', 'like', "%{$search}%")->whereRaw('LENGTH(kode) = 8')->limit(10)->pluck('nama', 'kode')->toArray()),
+                                ->selectablePlaceholder(false)
+                                ->getSearchResultsUsing(fn(string $search): array => Region::where('nama', 'like', "%{$search}%")->whereRaw('LENGTH(kode) = 8')->limit(10)->pluck('nama', 'kode')->toArray())
+                                ->getOptionLabelUsing(fn ($value): ?string => Region::where('kode', $value)->value('nama'))
+                                ,
                             Select::make('kota')
                                 ->hiddenLabel()
                                 ->placeholder(__('filament::resources/pasien-umum.field.kota'))
                                 ->searchable(['nama'])
-                                ->getSearchResultsUsing(fn(string $search): array => Region::where('nama', 'like', "%{$search}%")->whereRaw('LENGTH(kode) = 5')->limit(10)->pluck('nama', 'kode')->toArray()),
-                            TextInput::make('kode_pos')
-                                ->hiddenLabel()
-                                ->mask('99999')
-                                ->placeholder(__('filament::resources/pasien-umum.field.kode_pos')),
+                                ->selectablePlaceholder(false)
+                                ->getSearchResultsUsing(fn(string $search): array => Region::where('nama', 'like', "%{$search}%")->whereRaw('LENGTH(kode) = 5')->limit(10)->pluck('nama', 'kode')->toArray())
+                                ->getOptionLabelUsing(fn ($value): ?string => Region::where('kode', $value)->value('nama')),
                             Select::make('provinsi')
                                 ->hiddenLabel()
                                 ->placeholder(__('filament::resources/pasien-umum.field.provinsi'))
                                 ->searchable(['nama'])
-                                ->getSearchResultsUsing(fn(string $search): array => Region::where('nama', 'like', "%{$search}%")->whereRaw('LENGTH(kode) = 2')->limit(10)->pluck('nama', 'kode')->toArray()),
+                                ->selectablePlaceholder(false)
+                                ->getSearchResultsUsing(fn(string $search): array => Region::where('nama', 'like', "%{$search}%")->whereRaw('LENGTH(kode) = 2')->limit(10)->pluck('nama', 'kode')->toArray())
+                                ->getOptionLabelUsing(fn ($value): ?string => Region::where('kode', $value)->value('nama')),
+                            TextInput::make('kode_pos')
+                                ->hiddenLabel()
+                                ->mask('99999')
+                                ->placeholder(__('filament::resources/pasien-umum.field.kode_pos')),
                             TextInput::make('negara')
                                 ->hiddenLabel()
                                 ->placeholder(__('filament::resources/pasien-umum.field.negara')),
@@ -165,26 +179,41 @@ class PasienBiasa extends CreateRecord
                                 ->hiddenLabel()
                                 ->placeholder(__('filament::resources/pasien-umum.field.dom_kelurahan'))
                                 ->searchable(['nama'])
-                                ->getSearchResultsUsing(fn(string $search): array => Region::where('nama', 'like', "%{$search}%")->whereRaw('LENGTH(kode) = 13')->limit(10)->pluck('nama', 'kode')->toArray()),
+                                ->selectablePlaceholder(false)
+                                ->getSearchResultsUsing(fn(string $search): array => Region::where('nama', 'like', "%{$search}%")->whereRaw('LENGTH(kode) = 13')->limit(10)->pluck('nama', 'kode')->toArray())
+                                ->getOptionLabelUsing(fn ($value): ?string => Region::where('kode', $value)->value('nama'))
+                                ->afterStateUpdated(function (Get $get, Set $set)  { 
+                                    $set('dom_kecamatan', substr($get('dom_kelurahan'),0,8));
+                                    $set('dom_kota', substr($get('dom_kelurahan'),0,5));
+                                    $set('dom_provinsi', substr($get('dom_kelurahan'),0,2));
+                                })
+                                ->live(),
                             Select::make('dom_kecamatan')
                                 ->hiddenLabel()
                                 ->placeholder(__('filament::resources/pasien-umum.field.dom_kecamatan'))
                                 ->searchable(['nama'])
-                                ->getSearchResultsUsing(fn(string $search): array => Region::where('nama', 'like', "%{$search}%")->whereRaw('LENGTH(kode) = 8')->limit(10)->pluck('nama', 'kode')->toArray()),
+                                ->selectablePlaceholder(false)
+                                ->getSearchResultsUsing(fn(string $search): array => Region::where('nama', 'like', "%{$search}%")->whereRaw('LENGTH(kode) = 8')->limit(10)->pluck('nama', 'kode')->toArray())
+                                ->getOptionLabelUsing(fn ($value): ?string => Region::where('kode', $value)->value('nama')),
                             Select::make('dom_kota')
                                 ->hiddenLabel()
                                 ->placeholder(__('filament::resources/pasien-umum.field.dom_kota'))
                                 ->searchable(['nama'])
-                                ->getSearchResultsUsing(fn(string $search): array => Region::where('nama', 'like', "%{$search}%")->whereRaw('LENGTH(kode) = 5')->limit(10)->pluck('nama', 'kode')->toArray()),
-                            TextInput::make('dom_kode_pos')
-                                ->hiddenLabel()
-                                ->mask('99999')
-                                ->placeholder(__('filament::resources/pasien-umum.field.dom_kode_pos')),
+                                ->selectablePlaceholder(false)
+                                ->getSearchResultsUsing(fn(string $search): array => Region::where('nama', 'like', "%{$search}%")->whereRaw('LENGTH(kode) = 5')->limit(10)->pluck('nama', 'kode')->toArray())
+                                ->getOptionLabelUsing(fn ($value): ?string => Region::where('kode', $value)->value('nama')),
+                            
                             Select::make('dom_provinsi')
                                 ->hiddenLabel()
                                 ->placeholder(__('filament::resources/pasien-umum.field.dom_provinsi'))
                                 ->searchable(['nama'])
-                                ->getSearchResultsUsing(fn(string $search): array => Region::where('nama', 'like', "%{$search}%")->whereRaw('LENGTH(kode) = 2')->limit(10)->pluck('nama', 'kode')->toArray()),
+                                ->selectablePlaceholder(false)
+                                ->getSearchResultsUsing(fn(string $search): array => Region::where('nama', 'like', "%{$search}%")->whereRaw('LENGTH(kode) = 2')->limit(10)->pluck('nama', 'kode')->toArray())
+                                ->getOptionLabelUsing(fn ($value): ?string => Region::where('kode', $value)->value('nama')),
+                            TextInput::make('dom_kode_pos')
+                                ->hiddenLabel()
+                                ->mask('99999')
+                                ->placeholder(__('filament::resources/pasien-umum.field.dom_kode_pos')),
                             TextInput::make('dom_negara')
                                 ->hiddenLabel()
                                 ->placeholder(__('filament::resources/pasien-umum.field.dom_negara')),
@@ -194,11 +223,11 @@ class PasienBiasa extends CreateRecord
                                         $set('alamat_domisili', str($get('alamat')));
                                         $set('dom_rt', str($get('rt')));
                                         $set('dom_rw', str($get('rw')));
-                                        $set('dom_kelurahan', str($get('kelurahan')));
-                                        $set('dom_kecamatan', str($get('kecamatan')));
-                                        $set('dom_kota', str($get('kota')));
+                                        $set('dom_kelurahan', $get('kelurahan'));
+                                        $set('dom_kecamatan', $get('kecamatan'));
+                                        $set('dom_kota', $get('kota'));
                                         $set('dom_kode_pos', str($get('kode_pos')));
-                                        $set('dom_provinsi', str($get('provinsi')));
+                                        $set('dom_provinsi', $get('provinsi'));
                                         $set('dom_negara', str($get('negara')));
                                     })
                             ]),
@@ -277,7 +306,7 @@ class PasienBiasa extends CreateRecord
     protected function mutateFormDataBeforeCreate(array $data): array
     {
         $data['type'] = 0;
-
+        // dd($data);
         return $data;
     }
 }

@@ -74,9 +74,9 @@ class AdminPanelProvider extends PanelProvider
                 ->switchable(false)
                 ->users([
                     'Admin' => 'administrator',
-                    'Kasir' => 'kasir01',
-                    'Perawat' => 'perawat01',
-                    'Super User' => 'super'
+                    // 'Kasir' => 'kasir01',
+                    // 'Perawat' => 'perawat01',
+                    // 'Super User' => 'super'
                 ])   
             ])  
             ->userMenuItems([
