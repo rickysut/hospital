@@ -60,24 +60,24 @@ class AdminPanelProvider extends PanelProvider
             ->plugins([
                 FilamentSpatieRolesPermissionsPlugin::make(),
                 FilamentEditProfilePlugin::make()
-                ->slug('my-profile')
-                ->setTitle('Profile')
-                ->setNavigationLabel('Profile')
-                // ->setNavigationGroup(__('filament-spatie-roles-permissions::filament-spatie.section.roles_and_permissions'))
-                ->setIcon('heroicon-o-user')
-                ->setSort(10)
-                ->shouldShowBrowserSessionsForm()
-                ->shouldShowAvatarForm() ,
+                    ->slug('my-profile')
+                    ->setTitle('Profile')
+                    ->setNavigationLabel('Profile')
+                    // ->setNavigationGroup(__('filament-spatie-roles-permissions::filament-spatie.section.roles_and_permissions'))
+                    ->setIcon('heroicon-o-user')
+                    ->setSort(10)
+                    ->shouldShowBrowserSessionsForm()
+                    ->shouldShowAvatarForm() ,
                 FilamentDeveloperLoginsPlugin::make()
-                ->enabled()
-                ->column('name')
-                ->switchable(false)
-                ->users([
-                    'Admin' => 'administrator',
-                    // 'Kasir' => 'kasir01',
-                    // 'Perawat' => 'perawat01',
-                    // 'Super User' => 'super'
-                ])   
+                    ->enabled()
+                    ->column('name')
+                    ->switchable(false)
+                    ->users([
+                        'Admin' => 'administrator',
+                        // 'Kasir' => 'kasir01',
+                        // 'Perawat' => 'perawat01',
+                        // 'Super User' => 'super'
+                    ])   
             ])  
             ->userMenuItems([
                 'profile' => MenuItem::make()

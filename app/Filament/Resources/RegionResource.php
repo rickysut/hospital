@@ -35,11 +35,13 @@ class RegionResource extends Resource
         return $form
             ->schema([
                 TextInput::make('kode')
-                  ->required()
-                  ->maxLength(255),
+                    ->label(__('filament::resources/region.field.kode'))
+                    ->required()
+                    ->maxLength(20),
                 TextInput::make('nama')
-                  ->required()
-                  ->maxLength(255),
+                    ->label(__('filament::resources/region.field.nama'))
+                    ->required()
+                    ->maxLength(255),
             ]);
     }
 
@@ -51,8 +53,8 @@ class RegionResource extends Resource
             //         ->importer(RegionImporter::class)
             // ])
             ->columns([
-                TextColumn::make('kode')->searchable()->sortable(),
-                TextColumn::make('nama')->searchable()->sortable(),
+                TextColumn::make('kode')->label(__('filament::resources/region.field.kode'))->searchable()->sortable(),
+                TextColumn::make('nama')->label(__('filament::resources/region.field.nama'))->searchable()->sortable(),
             ])
             ->filters([
                 // Filter::make('kode')

@@ -6,7 +6,8 @@ return [
     'heading' => 'Informasi',
     'sub_heading' => 'Detail wilayah',
     'field' => [
-        'nama' => 'Nama wilayah',
+        'kode' => 'Kode Wilayah',
+        'nama' => 'Nama Wilayah',
         'created_at' => 'Dibuat tgl',
     ],
     'import' => [

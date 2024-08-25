@@ -6,7 +6,8 @@ return [
     'heading' => 'Information',
     'sub_heading' => 'Detail region',
     'field' => [
-        'nama' => 'Region name',
+        'kode' => 'Region Code',
+        'nama' => 'Region Name',
         'created_at' => 'Created at',
     ],
     'import' => [
